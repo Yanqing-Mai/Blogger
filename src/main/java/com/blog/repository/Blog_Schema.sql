@@ -1,33 +1,37 @@
-DROP DATABASE IF EXISTS classRoster;
-CREATE DATABASE classRoster;
+DROP DATABASE IF EXISTS blog;
 
-USE classRoster;
+CREATE DATABASE blog;
 
-CREATE TABLE teacher(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    firstName VARCHAR(30) NOT NULL,
-    lastName VARCHAR(50) NOT NULL,
-    specialty VARCHAR(50)
+USE blog;
+
+CREATE TABLE loginInfo (
+	id INT AUTO_INCREMENT,
+    username VARCHAR(25) NOT NULL,
+    password VARCHAR(25) NOT NULL,
+    email VARCHAR(25), 
+    CONSTRAINT pk_id
+        PRIMARY KEY (id)
 );
 
-CREATE TABLE student(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    firstName VARCHAR(30) NOT NULL,
-    lastName VARCHAR(50) NOT NULL
+CREATE TABLE postContent (
+	contentId INT AUTO_INCREMENT,
+    content VARCHAR(100) NOT NULL,
+    createdByUser VARCHAR(25) NOT NULL,
+    email VARCHAR(25), 
+    username VARCHAR(25),
+    CONSTRAINT pk_contentId
+        PRIMARY KEY (contentId)
 );
 
-CREATE TABLE course(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(255),
-    teacherId INT NOT NULL,
-    FOREIGN KEY (teacherId) REFERENCES teacher(id)
+CREATE TABLE userInfo (
+	id INT AUTO_INCREMENT,
+    lastName VARCHAR(25) NOT NULL,
+    firstName VARCHAR(25) NOT NULL,
+    birthday DATE, 
+    phoneNumber VARCHAR(25),
+	email VARCHAR(25),
+	username VARCHAR(25),
+    CONSTRAINT pk_id
+        PRIMARY KEY (id)
 );
 
-CREATE TABLE course_student(
-    courseId INT NOT NULL,
-    studentId INT NOT NULL,
-    PRIMARY KEY(courseId, studentId),
-    FOREIGN KEY (courseId) REFERENCES course(id),
-    FOREIGN KEY (studentId) REFERENCES student(id)
-);
